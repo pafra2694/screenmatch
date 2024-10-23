@@ -4,19 +4,19 @@ import com.aluracursos.screenmatch.modelos.Episodio;
 import com.aluracursos.screenmatch.modelos.Pelicula;
 import com.aluracursos.screenmatch.modelos.Serie;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Pelicula miPelicula = new Pelicula();
-        Pelicula otraPelicula = new Pelicula();
+        Pelicula miPelicula = new Pelicula("Encanto");
+        Pelicula otraPelicula = new Pelicula("Matrix");
 
-        miPelicula.setNombre("Encanto");
         miPelicula.setFechaDeLanzamiento(2021);
         miPelicula.setDuracionEnMinutos(120);
         miPelicula.setIncluidoEnPlan(true);
 
-        otraPelicula.setNombre("Matrix");
         otraPelicula.setFechaDeLanzamiento(1998);
         otraPelicula.setDuracionEnMinutos(180);
 
@@ -52,6 +52,22 @@ public class Main {
         episodio.setTotalVisualizaciones(50);
 
         filtroRecomendacion.filtra(episodio);
+
+        var peliculaDeBruno = new Pelicula("El señor de los anillos");
+        peliculaDeBruno.setDuracionEnMinutos(180);
+        peliculaDeBruno.setFechaDeLanzamiento(2001);
+
+        ArrayList<Pelicula> listaDePeliculas = new ArrayList<>();
+        listaDePeliculas.add(peliculaDeBruno);
+        listaDePeliculas.add(miPelicula);
+        listaDePeliculas.add(otraPelicula);
+
+        System.out.println("Tamaño de la lista: " + listaDePeliculas.size());
+        System.out.println("La primera película es: " + listaDePeliculas.get(0));
+
+        System.out.println(listaDePeliculas);
+        System.out.println("To string de la pelicula: " + listaDePeliculas.get(0).toString());
+
     }
 
 }
