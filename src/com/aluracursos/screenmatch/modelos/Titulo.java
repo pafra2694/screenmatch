@@ -1,4 +1,6 @@
 package com.aluracursos.screenmatch.modelos;
+import com.aluracursos.screenmatch.exceptions.ErrorEnConversionException;
+import com.google.gson.annotations.SerializedName;
 
 public class Titulo implements Comparable<Titulo>{
     private String nombre;
@@ -11,6 +13,15 @@ public class Titulo implements Comparable<Titulo>{
     public Titulo(String nombre, int fechaDeLanzamiento) {
         this.nombre = nombre;
         this.fechaDeLanzamiento = fechaDeLanzamiento;
+    }
+
+    public Titulo(TituloOmdb miTituloOmdb) {
+        this.nombre = miTituloOmdb.title();
+        this.fechaDeLanzamiento = Integer.valueOf(miTituloOmdb.year());
+        if(miTituloOmdb.runtime().contains("N/A")){
+            throw new ErrorEnConversionException("No contiene duracion");
+        }
+        this.duracionEnMinutos = Integer.valueOf(miTituloOmdb.runtime().split(" ")[0]);
     }
 
     public void setNombre(String nombre) {
@@ -60,5 +71,12 @@ public class Titulo implements Comparable<Titulo>{
     @Override
     public int compareTo(Titulo otroTitulo) {
         return this.getNombre().compareTo(otroTitulo.getNombre());
+    }
+
+    @Override
+    public String toString() {
+        return  "(Nombre= " + nombre +
+                ", Año de lanzamiento= " + fechaDeLanzamiento +
+                ", Duración= " + duracionEnMinutos+")";
     }
 }
